@@ -3,10 +3,9 @@
 // Add to the top of the file
 const User = use('App/Models/User')
 const { validate } = use('Validator')
+const mainnet = 'http://127.0.0.1:7545'
 
-var  Web3 = require("web3")
-
-const mainnet = 'http://127.0.0.1:7545';
+var Web3 = require("web3")
 
 let web3 = new Web3(new Web3.providers.HttpProvider(mainnet));
 
@@ -47,19 +46,19 @@ class UserController {
             await user.save()
             
             // Adding await keyword, because web3.eth.personal.newAccount as promise callback style
-            const address = await web3.eth.personal.newAccount(request.input('password'))
+            const address = await web3.eth.personal.newAccount(user.password)
             
             // Generate JWT token for user
             const token = await auth.generate(user)
-            
+
             // Show response
             return response.json({
                 message: 'Successfully',
-                data: address
+                data: token
             })
         } catch (error) {
             // Show response
-            return response.status(400).json({
+            return response.status(422).json({
                 status: 'error',
                 message: 'You can\'t register. Please try again!'
             })
