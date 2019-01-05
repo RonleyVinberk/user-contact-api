@@ -20,6 +20,8 @@ Route.group(() => {
     Route.post('users/signup', 'UserController.signup')     
     Route.post('users/signin', 'UserController.signin')
     Route.post('users/account', 'AccountController.account')
+    Route.get('users/createaccount', 'CreateAccountController.create')
+    Route.get('users/createwallet', 'CreateWalletController.create')
 }).prefix('api/v1')
 
 Route.group(() => {
