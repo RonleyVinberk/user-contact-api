@@ -37,8 +37,7 @@ class AccountController {
             // console.log(util.inspect(getacc));
             
             /*##### Start display message when ERROR from API local to server Etherscan #####*/
-            if(getacc.data.message == 'NOTOK')
-            {
+            if(getacc.data.message == 'NOTOK') {
                 return response.json({
                     status:1,
                     message: getacc.data.result
@@ -53,12 +52,13 @@ class AccountController {
             }
             /*##### End display message when ERROR from API local to server Etherscan #####*/
         } catch (error) {
-            /*##### Start display message when ERROR form frontend to API #####*/
+            /*##### Start display message when ERROR from frontend to API local #####*/
             // console.error(error)
             return response.status(500).json({
                 status: 402,
                 message: getacc.data.result
             })
+            /*##### End display message when ERROR from frontend to API local #####*/
         }
     }
 }
